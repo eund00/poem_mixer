@@ -191,9 +191,13 @@
             font-size: 1.4rem;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: .5rem;
             height: calc(100% - 10%);
             width: calc(100% - 5%);
+        }
+
+        .box_4 input {
+            margin-bottom: 0.5rem;
         }
 
         .box .poem_box textarea {
@@ -316,7 +320,10 @@
                     <input id="btn_nickname" type="text" />
                     <p>시의 제목은 무엇으로 할까요?</p>
                     <input id="btn_poemtit" type="text" />
-                    <p>아, 몇 어절로 자를까요?</p>
+                    <p>
+                        아, 몇 어절로 자를까요?<br>
+                        <span style="font-size: 1rem;">(숫자만 입력해주세요)</span>
+                    </p>
                     <input id="btn_number" type="number" />
                     <div>
                         <button class="prevBtn">⬅️</button>
@@ -348,6 +355,13 @@
                 </div>
             </div>
         </div>
+        <p class="footer" style="
+        position: absolute;
+        bottom: 2%;
+        color: #333;
+        font-size: 1rem;
+    ">© 2025 이은주 · <a href="mailto:leeeunj00@naver.com" style="color: #333">leeeunj00@naver.com</a></p>
+
     </div>
 </body>
 <script>
