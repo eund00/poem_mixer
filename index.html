@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eundoo_house</title>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+    <style>
+        /* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+        html,
+        body,
+        div,
+        span,
+        applet,
+        object,
+        iframe,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        blockquote,
+        pre,
+        a,
+        abbr,
+        acronym,
+        address,
+        big,
+        cite,
+        code,
+        del,
+        dfn,
+        em,
+        img,
+        ins,
+        kbd,
+        q,
+        s,
+        samp,
+        small,
+        strike,
+        strong,
+        sub,
+        sup,
+        tt,
+        var,
+        b,
+        u,
+        i,
+        center,
+        dl,
+        dt,
+        dd,
+        ol,
+        ul,
+        li,
+        fieldset,
+        form,
+        label,
+        legend,
+        table,
+        caption,
+        tbody,
+        tfoot,
+        thead,
+        tr,
+        th,
+        td,
+        article,
+        aside,
+        canvas,
+        details,
+        embed,
+        figure,
+        figcaption,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        output,
+        ruby,
+        section,
+        summary,
+        time,
+        mark,
+        audio,
+        video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        /* HTML5 display-role reset for older browsers */
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        section {
+            display: block;
+        }
+
+        body {
+            line-height: 1;
+        }
+
+        ol,
+        ul {
+            list-style: none;
+        }
+
+        blockquote,
+        q {
+            quotes: none;
+        }
+
+        blockquote:before,
+        blockquote:after,
+        q:before,
+        q:after {
+            content: '';
+            content: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background: #ccd5ae;
+        }
+
+        .main_in {
+            position: relative;
+            width: calc(100vw - 15%);
+            max-width: 800px;
+            height: calc(100vh - 10%);
+            max-height: 800px;
+            opacity: 0.75;
+            background: #faedcd;
+            border-radius: 15px;
+        }
+
+        .box {
+            visibility: hidden;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .box.active {
+            visibility: visible;
+            pointer-events: all;
+        }
+
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box .poem_box {
+            justify-content: center;
+            text-align: center;
+            font-size: 1.4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            height: calc(100% - 10%);
+            width: calc(100% - 5%);
+        }
+
+        .box .poem_box textarea {
+            width: 100%;
+            height: 100%;
+            padding: 1rem;
+            font-size: 1.5rem;
+            box-sizing: border-box;
+        }
+
+        .box_1>div {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            line-height: 1.5;
+        }
+
+        .box>div button {
+            outline: none;
+            border: none;
+            font-size: 1.5rem;
+            padding: 0.8rem;
+            background-color: #d4a373;
+            border-radius: 0.5rem;
+            color: #33352c;
+        }
+
+        .box_1 .tit {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .box_1 .txt {
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .dada_result {
+            height: 100%;
+            border-radius: 5%;
+            padding: 1rem;
+        }
+
+        .dada_result span {
+            padding-right: .5rem;
+            font-size: 1.2rem;
+        }
+
+        .poem_box input {
+            padding: 1rem;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .all_box {
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            border-radius: 1rem;
+            padding: 1rem;
+            box-sizing: border-box;
+            overflow-y: scroll;
+        }
+
+        .all_box .real_name {
+            padding-bottom: 1rem;
+        }
+
+        .all_box .real_dada {}
+    </style>
+</head>
+
+<body class="captureTarget">
+    <div class="main">
+        <div class="main_in">
+            <div class="box box_1 active">
+                <div>
+                    <p class="tit">
+                        <span>🍜✍️</span>
+                        <span>짬뽕 시 만들기</span>
+                    </p>
+                    <p class="txt">
+                        두 개의 시를 넣고,<br>
+                        단어들을 마구 뒤섞어,<br>
+                        새로운 시 한 그릇!<br>
+                        <br>
+                        뜻은 없어도 맛은 있다.<br>
+                        이것이 짬뽕시.<br>
+                    </p>
+                    <button id="startBtn">시작하기🔥</button>
+                </div>
+            </div>
+            <div class="box box_2">
+                <div class="poem_box">
+                    <p>첫 번재 시✏️</p>
+                    <textarea name="" id="dada_txt1"></textarea>
+                    <div>
+                        <button class="prevBtn">⬅️</button>
+                        <button class="nextBtn">✅</button>
+                    </div>
+                </div>
+            </div>
+            <div class="box box_3">
+                <div class="poem_box">
+                    <p>두 번재 시✏️</p>
+                    <textarea name="" id="dada_txt2"></textarea>
+                    <div>
+                        <button class="prevBtn">⬅️</button>
+                        <button class="nextBtn">✅</button>
+                    </div>
+                </div>
+            </div>
+            <div class="box box_4">
+                <div class="poem_box">
+                    <p>시인의 이름이 어떻게 되세요?</p>
+                    <input id="btn_nickname" type="text" />
+                    <p>시의 제목은 무엇으로 할까요?</p>
+                    <input id="btn_poemtit" type="text" />
+                    <p>아, 몇 어절로 자를까요?</p>
+                    <input id="btn_number" type="number" />
+                    <div>
+                        <button class="prevBtn">⬅️</button>
+                        <button class="nextBtn submitBtn" id="resultBtn">✅</button>
+                    </div>
+                </div>
+            </div>
+            <div class="box box_5">
+                <div class="poem_box dada_result">
+                    <p style="line-height: 1.5">
+                        짜잔,✨<br>
+                        짬뽕 시 완성🍜
+                    </p>
+                    <div class="all_box">
+                        <p class="real_name" id="real_title">시의 제목은?</p>
+                        <span id="real_nickname" style="width: 100%;
+                        display: inline-block;
+                        text-align: right;
+                        padding: 0;
+                        padding-bottom: 1rem;">땡땡</span>
+                        <p class="real_dada">
+                            <span class="fc_gray">dada is free</span>
+                        </p>
+                    </div>
+                    <div>
+                        <button id="captureBtn">📸</button>
+                        <button id="retrunBtn">처음으로 돌아가기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const btn = document.getElementById('resultBtn');
+        const btn_number = document.getElementById("btn_number");
+        const txt1 = document.getElementById("dada_txt1");
+        const txt2 = document.getElementById("dada_txt2");
+        const resultDiv = document.querySelector(".real_dada");
+
+        const text1 = document.getElementById('dada_txt1').value.trim();
+        const text2 = document.getElementById('dada_txt2').value.trim();
+
+        // 짬뽕시 만들기
+        btn.addEventListener("click", function () {
+            // 입력된 텍스트 가져오기
+            const text1 = txt1.value.trim();
+            const text2 = txt2.value.trim();
+
+            // 공백을 기준으로 단어 분리
+            let wordsArray = [...text1.split(/\s+/), ...text2.split(/\s+/)];
+
+            // 배열 섞기 (Fisher-Yates Shuffle 알고리즘)
+            for (let i = wordsArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [wordsArray[i], wordsArray[j]] = [wordsArray[j], wordsArray[i]];
+            }
+
+            // 결과 초기화
+            resultDiv.innerHTML = "";
+
+            // 20개의 단어를 선택하여 p 태그에 추가
+            for (
+                let i = 0;
+                i < Math.min(btn_number.value, wordsArray.length);
+                i++
+            ) {
+                const span = document.createElement("span");
+                span.textContent = wordsArray[i];
+                resultDiv.appendChild(span);
+            }
+        });
+
+        // 맨처음 시작 버튼
+        document.getElementById('startBtn').addEventListener('click', function () {
+            // body 안에서 .box_1 요소 찾고 active 제거
+            const box5 = document.querySelector('body .box_1');
+            if (box5) box5.classList.remove('active');
+
+            // body 안에서 .box_2 요소 찾고 active 추가
+            const box1 = document.querySelector('body .box_2');
+            if (box1) box1.classList.add('active');
+        });
+
+        // 다음 버튼
+        document.querySelectorAll('.nextBtn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                // 버튼의 조상 중 .box_숫자 클래스가 있는 요소 찾기
+                const parentBox = this.closest('.box');
+                if (!parentBox) return;
+
+                // .box_숫자 클래스 이름에서 숫자 추출
+                const boxClass = Array.from(parentBox.classList).find(cls => cls.startsWith('box_'));
+                if (!boxClass) return;
+
+                const currentNum = parseInt(boxClass.split('_')[1]);
+                const nextNum = currentNum + 1;
+
+                // 현재 active 제거
+                parentBox.classList.remove('active');
+
+                // 다음 박스에 active 추가
+                const nextBox = document.querySelector(`.box.box_${nextNum}`);
+                if (nextBox) {
+                    nextBox.classList.add('active');
+                }
+            });
+        });
+
+        // 이름, 제목, 내용 등 input 보내기
+        document.querySelectorAll('.submitBtn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                console.log('🔥 클릭!');
+                const inputValue1 = document.getElementById('btn_nickname').value;
+                const inputValue2 = document.getElementById('btn_poemtit').value;
+                document.getElementById('real_nickname').textContent = inputValue1;
+                document.getElementById('real_title').textContent = inputValue2;
+            });
+        });
+
+        // 이전 버튼
+        document.querySelectorAll('.prevBtn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                // 버튼의 조상 중 .box_숫자 클래스가 있는 요소 찾기
+                const parentBox = this.closest('.box');
+                if (!parentBox) return;
+
+                // .box_숫자 클래스 이름에서 숫자 추출
+                const boxClass = Array.from(parentBox.classList).find(cls => cls.startsWith('box_'));
+                if (!boxClass) return;
+
+                const currentNum = parseInt(boxClass.split('_')[1]);
+                const prevNum = currentNum - 1;
+
+                // 현재 active 제거
+                parentBox.classList.remove('active');
+
+                // 다음 박스에 active 추가
+                const nextBox = document.querySelector(`.box.box_${prevNum}`);
+                if (nextBox) {
+                    nextBox.classList.add('active');
+                }
+            });
+        });
+
+
+        // 캡쳐하기
+        document.getElementById('captureBtn').addEventListener('click', function () {
+            const target = document.querySelector('.captureTarget'); // 캡처할 요소
+
+            html2canvas(target).then(canvas => {
+                const link = document.createElement('a');
+                link.download = '짬뽕나왔습니당.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        });
+
+        // 처음 화면으로 돌아가기
+        document.getElementById('retrunBtn').addEventListener('click', function () {
+            // body 안에서 .box_5 요소 찾고 active 제거
+            const box5 = document.querySelector('body .box_5');
+            if (box5) box5.classList.remove('active');
+
+            // body 안에서 .box_1 요소 찾고 active 추가
+            const box1 = document.querySelector('body .box_1');
+            if (box1) box1.classList.add('active');
+        });
+
+    });
+</script>
+
+</html>
